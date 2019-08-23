@@ -1,4 +1,20 @@
 print("otwarcie pliku /home/zgm/Pulpit/Bogusia/marked_dup_metrics_T.txt do odczytu")
+
+with open('/home/zgm/Pulpit/Bogusia/marked_dup_metrics_T.txt') as f:
+    for line in f.readlines():
+        if line.startswith("## METRICS CLASS"):
+            print(line)
+            print("")
+            klucz = f.readline().replace('\n', '').split('\t')
+
+            wartosc = f.readline().replace('\n', '').split('\t')
+
+            print("klucze=", klucz)
+            print("")
+            print("wartosci=",wartosc)
+            print("")
+
+"""
 plik = open('/home/zgm/Pulpit/Bogusia/marked_dup_metrics_T.txt')
 
 lini = plik.readline()
@@ -42,9 +58,9 @@ proc=float(slownik['PERCENT_DUPLICATION'].replace(',','.'))
 
 print("proc przed przemnozeniem")
 print (proc)
-proc=round(proc*100, 4)
+proc=proc*100
 print("proc po przemnozeniu")
-print(proc)
+print(proc * 100)
 
 print("///////////////////////////////////////////")
 print("zapis do pliku")
@@ -60,4 +76,4 @@ pli.write(",\n")
 pli.close()
 
 print("zapisano do pliku")
-
+"""
