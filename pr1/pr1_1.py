@@ -1,18 +1,72 @@
-print("otwarcie pliku /home/zgm/Pulpit/Bogusia/marked_dup_metrics_T.txt do odczytu")
+print("otwarcie pliku /home/zgm/Pulpit/Bogusia/marked_dup_metrics_N.txt do odczytu")
 
-with open('/home/zgm/Pulpit/Bogusia/marked_dup_metrics_T.txt') as f:
+with open('/home/zgm/Pulpit/Bogusia/marked_dup_metrics_N.txt') as f:
+    start_reading = False
+    read_lines_counter = 0
     for line in f.readlines():
         if line.startswith("## METRICS CLASS"):
-            print(line)
-            print("")
-            klucz = f.readline().replace('\n', '').split('\t')
+            print('ok')
+            start_reading = True
+        if start_reading and read_lines_counter <= 2:
 
-            wartosc = f.readline().replace('\n', '').split('\t')
+            if read_lines_counter == 1:
+                print("Pierwsza linia do zapisu")
+                klucz = line.replace('\n', '').split('\t')
 
-            print("klucze=", klucz)
-            print("")
-            print("wartosci=",wartosc)
-            print("")
+            if read_lines_counter == 2:
+                print("druga linia do zapisu")
+                wartosc = line.replace('\n', '').split('\t')
+
+            read_lines_counter = read_lines_counter + 1
+
+print("klucze=", klucz)
+print("")
+print("wartosci=", wartosc)
+print("")
+print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+slownik = {}
+
+for i in range(0, len(klucz), 1):
+    slownik[klucz[i]] = wartosc[i]
+    print(klucz[i], wartosc[i])
+print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+print('')
+print(slownik.items())
+
+print("///////////////////////////////////////////")
+
+print("wybranie danych do zapisu")
+ilo=int(slownik['READ_PAIR_DUPLICATES'])+int(slownik['UNPAIRED_READ_DUPLICATES'])
+proc=float(slownik['PERCENT_DUPLICATION'].replace(',','.'))
+
+print("proc przed przemnozeniem")
+print (proc)
+proc=round(proc*100, 4)
+print("proc po przemnozeniu")
+print(proc)
+
+print("///////////////////////////////////////////")
+print("zapis do pliku")
+
+pli=open("/home/zgm/Pulpit/Bogusia/raport.csv",'a')
+pli.write("raport z marked_dup_metrics_N.txt,\n")
+pli.write("Duplikatow jest, ")
+pli.write(str(ilo))
+pli.write(",\n")
+pli.write("Procentowy udznial duplikatow,")
+pli.write(str(proc))
+pli.write(",\n")
+pli.close()
+
+print("zapisano do pliku")
+
+
+
+
+
+
+
 
 """
 plik = open('/home/zgm/Pulpit/Bogusia/marked_dup_metrics_T.txt')

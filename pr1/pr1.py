@@ -18,12 +18,12 @@ while lini != '':
         print("")
         print("v=", v)
         print("")
-        slownik={}
+        slownik = {}
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         #slownik=slownik.fromkeys(k,0)
         for i in range(0, len(k), 1):
-            slownik[k[i]]=v[i]
+            slownik[k[i]] = v[i]
             print(k[i], v[i])
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         print('')
